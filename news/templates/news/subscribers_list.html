@@ -1,0 +1,16 @@
+{% extends 'news/default.html' %}
+
+{% block title %}
+Все подписки
+{% endblock title %}
+
+
+{% block content %}
+<ul>{% for sub in subscribers %}
+<li>{{ sub.user.username }}</li>
+    {{ sub.category }}
+
+    {% empty %}
+    <li>Нет подписок</li>
+    {% endfor %}</ul>
+{% endblock content %}

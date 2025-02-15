@@ -1,0 +1,16 @@
+{% extends 'news/default.html'%}
+
+{% block title %}
+Создание нового поста
+{% endblock %}
+
+
+{% block content %}
+<ul><h1>Создание новый пост</h1>
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Создать" />
+    </form></ul>
+{% endblock %}

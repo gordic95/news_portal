@@ -1,0 +1,66 @@
+{% extends "news/default.html" %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+
+{% block title %}
+Все посты и новости
+{% endblock %}
+
+
+
+{% block content %}
+<ul>
+    <H1>Все публикации</H1>
+<form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="date" name="date_create" value="date_create" />
+       <input type="submit" value="Найти" />
+   </form>
+    <p>
+
+
+
+
+   <h3>{% current_time '%b %d %Y' %}</h3>
+</ul>
+<ul>
+    ____тут надо редактировать____
+<p>Количество постов на сегодняшний день: {{posts|length}}</p>
+
+ <hr>
+
+{% if posts %}
+    {% for post in posts %}
+        <p>Заголовок: {{post.title|censore|truncatechars:50|capfirst}}</p>
+        <p>Описание: {{post.text|truncatechars:100|capfirst}}</p>
+        <p>Автор: {{post.author}}</p>
+    <p>Дата публикации: {{post.date_create|date:"M, d, Y" }}</p>
+    <button> <a href="{% url 'news:post_detail' post.id %}">Читать</a></button>
+<hr>
+    {% endfor %}
+{% else %}
+<p>Нет постов</p>
+{% endif %}
+    </ul>
+
+<ul>
+<!--#пагинация-->
+{% if page_obj.has_previous %}
+<a href="?{% url_replace page=1 %}">1</a>
+    {% if page_obj.previous_page_number != 1%}
+...
+<a href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a>
+{%endif%}
+
+{% endif %}
+
+{{page_obj.number}}
+
+
+
+{% if page_obj.has_next %}
+<a href="?page={{page_obj.next_page_number}}">Следующая</a>
+{% endif %}
+    {% endblock %}<ul/>

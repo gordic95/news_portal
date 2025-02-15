@@ -1,0 +1,26 @@
+{% extends "news/default.html" %}
+
+
+{% block title %}
+Категория {{category.name}}
+{% endblock %}
+
+{% block content %}
+<h1>Категория: {{category.name}}</h1>
+{% if posts %}
+<ul>
+    {% for post in posts %}
+    <p><li><a href="{% url 'news:post_detail' post.pk %}">{{post.title}}</a></li></p>
+
+    {% endfor %}</ul>
+    {% else %}
+    <p>Нет постов</p>
+    {% endif %}
+
+
+{% if not_cubscriber %}
+<button> <a href="subscribe/"> Подписаться!</a> </button>
+{% endif %}
+
+{% endblock %}
+
